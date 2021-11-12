@@ -10,7 +10,7 @@ import esecuele._
 
 import javax.inject.Inject
 import models.Helpers._
-import models.db.{QAOTF, QLITAGG, QW2V}
+import models.db.{QAOTF, QLITAGG, QW2V, QInternalAssays}
 import models.entities.Publication._
 import models.entities.Aggregations._
 import models.entities.Associations._
@@ -732,6 +732,13 @@ class Backend @Inject()(
         logger.info(s"there is no publications with this set of ids $ids")
         Future.successful(Publications.empty())
     }
+  }
+
+  def getInternalAssays(ensembl_gene_id: String): Future[IndexedSeq[InternalAssay]] = {
+    val table = defaultOTSettings.clickhouse.internalAssays.name
+    logger.info(s"query internal assays in table ${table}")
+    val query = QInternalAssays(table, ensembl_gene_id)
+    dbRetriever.executeQuery[InternalAssay, Query](query.query)
   }
 
   /**
