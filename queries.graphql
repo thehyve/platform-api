@@ -313,4 +313,10 @@ query test {
         }
       }
     }
+  }
+  internalAssays(ensemblId: "ENSG00000167207") {
+    id
+    title
+    method
+  }
 }

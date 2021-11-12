@@ -31,6 +31,8 @@ object Configuration {
   case class LiteratureIndexSettings(label: String, name: String)
   case class LiteratureSettings(label: String, name: String)
 
+  case class InternalAssaysSettings(label: String, name: String)
+
   case class TargetSettings(associations: AssociationSettings)
 
   case class DiseaseSettings(associations: AssociationSettings)
@@ -48,7 +50,8 @@ object Configuration {
                                 similarities: AssociationSettings,
                                 harmonic: HarmonicSettings,
                                 literature: LiteratureSettings,
-                                literatureIndex: LiteratureIndexSettings)
+                                literatureIndex: LiteratureIndexSettings,
+                                internalAssays: InternalAssaysSettings)
 
   /** main Open Targets configuration object. It keeps track of meta, elasticsearch and clickhouse
     * configuration.
@@ -67,6 +70,7 @@ object Configuration {
   implicit val luTableJSONImp = Json.format[LUTableSettings]
   implicit val literatureSettingsJSONImp = Json.format[LiteratureSettings]
   implicit val literatureIndexSettingsJSONImp = Json.format[LiteratureIndexSettings]
+  implicit val internalAssaysSettingsJSONImp = Json.format[InternalAssaysSettings]
   implicit val associationSettingsJSONImp = Json.format[AssociationSettings]
   implicit val datasourceSettingsJSONImp = Json.format[DatasourceSettings]
   implicit val harmonicSettingsJSONImp = Json.format[HarmonicSettings]

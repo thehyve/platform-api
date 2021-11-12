@@ -752,6 +752,7 @@ object Objects extends Logging {
   implicit val harmonicSettingsImp = deriveObjectType[Backend, HarmonicSettings]()
   implicit val literatureSettingsImp = deriveObjectType[Backend, LiteratureSettings]()
   implicit val literatureIndexSettingsImp = deriveObjectType[Backend, LiteratureIndexSettings]()
+  implicit val internalAssaysSettingsImp = deriveObjectType[Backend, InternalAssaysSettings]()
   implicit val clickhouseSettingsImp = deriveObjectType[Backend, ClickhouseSettings]()
 
   implicit lazy val aggregationImp: ObjectType[Backend, Aggregation] =
@@ -878,6 +879,13 @@ object Objects extends Logging {
   )
 
   implicit val searchResultsImp = deriveObjectType[Backend, models.entities.SearchResults]()
+
+  implicit val internalAssaysImp = deriveObjectType[Backend, InternalAssay](
+    ObjectTypeDescription("...some description..."),
+    DocumentField("id", "...id..."),
+    DocumentField("title", "...title..."),
+    DocumentField("method", "...method...")
+  )
 
   val searchResultsGQLImp = ObjectType(
     "SearchResults",

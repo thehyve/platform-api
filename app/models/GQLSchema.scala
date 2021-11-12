@@ -98,6 +98,13 @@ object GQLSchema {
         description = Some("Gene ontology terms"),
         arguments = goIds :: Nil,
         resolve = ctx => goFetcher.deferSeqOptExplicit(ctx.arg(goIds))
+      ),
+      Field(
+        "internalAssays",
+        ListType(internalAssaysImp),
+        description = Some("Internal assays"),
+        arguments = ensemblId :: Nil,
+        resolve = ctx => ctx.ctx.getInternalAssays(ctx.arg(ensemblId))
       )
     )
   )
