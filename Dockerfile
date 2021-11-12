@@ -1,13 +1,15 @@
-FROM openjdk:11
-RUN mkdir -p /srv/app
+FROM mozilla/sbt:8u292_1.5.4
 
-COPY target/universal/ot-platform-api-latest.zip /srv/app/ot-platform-api-latest.zip
+RUN mkdir -p /platform-api /srv/app
+COPY . /platform-api
+WORKDIR /platform-api
+RUN sbt dist
+RUN mv /platform-api/target/universal/ot-platform-api-latest.zip /srv/app/ot-platform-api-latest.zip
+WORKDIR /srv/app
+RUN unzip -q ot-platform-api-latest.zip
 COPY production.conf /srv/app/production.conf
 COPY production.xml /srv/app/production.xml
-WORKDIR /srv/app
-RUN unzip ot-platform-api-latest.zip
-
-RUN chmod +x ot-platform-api-latest/bin/ot-platform-api
+RUN rm -rf /platform-api
 ENTRYPOINT ot-platform-api-latest/bin/ot-platform-api \
     -J-Xms2g \
     -J-Xmx7g \
@@ -19,3 +21,4 @@ ENTRYPOINT ot-platform-api-latest/bin/ot-platform-api \
     -Dcom.sun.management.jmxremote.port=31238 \
     -Dcom.sun.management.jmxremote.ssl=false \
     -Dcom.sun.management.jmxremote.authenticate=false \
+    -Dpidfile.path=/dev/null
