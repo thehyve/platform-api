@@ -17,12 +17,12 @@ case class QInternalAssays(
   val table: Column = column(tableName)
 
   val query = {
-    val q = Query(
+    val query = Query(
       Select(col_ensembl_gene_id :: col_title :: col_method :: Nil),
       From(table),
       Where(Functions.equals(col_ensembl_gene_id, literal(ensembl_gene_id)))
     )
-    logger.debug(q.toString)
-    q
+    logger.debug(query.toString)
+    query
   }
 }
