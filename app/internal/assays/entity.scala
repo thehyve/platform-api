@@ -10,7 +10,8 @@ case class InternalAssay(
 )
 
 object InternalAssay {
-  implicit val getRowFromDB: GetResult[InternalAssay] = GetResult(r => InternalAssay(r.<<, r.<<, r.<<))
-
+  implicit val getRowFromDB: GetResult[InternalAssay] = GetResult(
+    r => InternalAssay(r.<<, r.<<, r.<<)
+  )
   implicit val internalAssaysImp: OFormat[InternalAssay] = Json.format[InternalAssay]
 }
