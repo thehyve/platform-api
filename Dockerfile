@@ -15,4 +15,5 @@ ENTRYPOINT ot-platform-api-beta-latest/bin/ot-platform-api-beta \
   -J-Xmx7g \
   -J-server \
   -Dconfig.file=/srv/app/production.conf \
-  -Dlogger.file=/srv/app/production.xml
+  -Dlogger.file=/srv/app/production.xml \
+  -Dpidfile.path=/dev/null
