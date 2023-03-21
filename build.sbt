@@ -56,12 +56,19 @@ lazy val cats = Seq(
 )
 libraryDependencies ++= cats
 
-val s4sVersion = "7.9.2"
+val s4sVersion = "8.5.3"
 libraryDependencies ++= Seq(
   "com.sksamuel.elastic4s" %% "elastic4s-core" % s4sVersion,
   "com.sksamuel.elastic4s" %% "elastic4s-client-esjava" % s4sVersion,
   "com.sksamuel.elastic4s" %% "elastic4s-http-streams" % s4sVersion,
   "com.sksamuel.elastic4s" %% "elastic4s-json-play" % s4sVersion
+)
+// elastic4s 8.5.3 depends on a newer Akka version than other deps pull;
+// explicitly pull that newer version of the other Akka artifacts
+libraryDependencies ++= Seq(
+   "com.typesafe.akka" %% "akka-actor-typed" % "2.6.20",
+   "com.typesafe.akka" %% "akka-slf4j" % "2.6.20",
+   "com.typesafe.akka" %% "akka-serialization-jackson" % "2.6.20"
 )
 
 lazy val frontendRepository = settingKey[String]("Git repository with open targets front end.")
