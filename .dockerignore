@@ -1,0 +1,23 @@
+# translation of .gitignore into .dockerignore syntax
+**/*.class
+**/*.log
+/target/
+/project/project/
+/project/target/
+**/.idea/
+**/.bsp
+app/.metals/
+app/build.sbt
+app/project/
+**/lib/
+**/.metals/
+**/.bloop/
+/test/project
+/test/resources/project
+/app/target
+project/metals.sbt
+.vscode/settings.json
+# additional files that should not trip up caching of build layers
+**/.*.swp
+/.git/
+**/.gitignore
