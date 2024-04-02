@@ -1,4 +1,4 @@
-FROM sbtscala/scala-sbt:eclipse-temurin-jammy-11.0.20.1_1_1.9.6_2.13.12 as build
+FROM sbtscala/scala-sbt:eclipse-temurin-jammy-11.0.22_7_1.9.9_2.13.13 as build
 RUN apt-get update \
     && apt-get install -y unzip \
     && rm -rf /var/lib/apt/lists/*
