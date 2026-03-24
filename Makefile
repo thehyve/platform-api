@@ -1,6 +1,9 @@
 logfile:=""
 clickhouse_password:=""
 
+# Load variables from .env file if it exists
+-include .env
+
 # This Makefile helper automates bringing up and tearing down a local deployment of Open Targets Platform
  .DEFAULT_GOAL := help
 
