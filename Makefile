@@ -1,4 +1,8 @@
 logfile:=""
+clickhouse_password:=""
+
+# Load variables from .env file if it exists
+-include .env
 
 # This Makefile helper automates bringing up and tearing down a local deployment of Open Targets Platform
  .DEFAULT_GOAL := help
@@ -9,6 +13,13 @@ help: ## Show this help message
 
 run: ## Runs API
 	@sbt run -J-Xms2g -J-Xmx7g
+
+run_dev: ## Runs API in dev mode
+	@if [ -z "$(clickhouse_password)" ]; then \
+		echo "ERROR: Clickhouse password is not set. Please see LastPass for the password and add it to the top of the Makefile."; \
+		exit 1; \
+	fi
+	@sbt run -Dconfig.file=conf/application.dev.conf -DSLICK_CLICKHOUSE_PASSWORD=$(clickhouse_password)
 
 debug: ## Debugs API
 	@sbt -jvm-debug 9999 run -DPLATFORM_API_IGNORE_CACHE=true
